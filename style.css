@@ -1,0 +1,84 @@
+body {
+    margin:0;
+    font-family: 'Squada One', sans-serif;
+    background-color:#f0f0f0;
+    font-size:18px;
+    -webkit-user-select:none;
+    user-select:none;
+}
+.hidden{
+  display:none;
+}
+.container{
+    max-width:360px;
+    min-width: 300px;
+    margin:0 auto;
+    padding:2px 10px;
+}
+.relative{
+  position:relative;
+}
+.btn{
+  max-width:300px;
+  min-width:100px;
+  width:60%;
+  margin:10px auto;
+  border-radius:40px;
+  background:linear-gradient(40deg,#f80,#fc0);
+  color:#f50;
+  border:solid 6px #fb0;
+  box-shadow:0 2px 5px rgba(0,0,0,.3);
+  text-shadow:1px 1px 0 rgba(0,0,0,.08);
+  padding:8px 40px;
+  text-align:center;
+  font-size:32px;
+  transform:scale(1);
+  opacity:1;
+  transition:.2s;
+}
+.btn:active{
+  transform:scale(.98);
+  opacity:.9;
+  transition:0s;
+}
+.nav .btn:not(:last-child){
+  margin-bottom:30px;
+}
+#screen-game-mode{
+  padding-top:40px;
+}
+#screen-main h1{
+  font-size:56px;
+  text-align:center;
+  line-height:.85;
+  margin:40px 0 50px;
+  color:#252525;
+  text-shadow:0 2px 4px rgba(0,0,0,.3);
+  letter-spacing:.3ch;
+}
+#cnv,#img-target,#level-info{
+  border-radius:2px;
+}
+#cnv{
+  background:#252525;
+  width:100%;
+}
+#img-target{
+  height:100px;
+  margin:4px 0 8px;
+  border:solid 1px rgba(0,0,0,.6);
+}
+#level-info{
+  position:absolute;
+  height:100px;
+  right:8px;
+  top:6px;
+}
+#menu{
+  position:relative;
+  width:100%;
+  padding:5px 0;
+  top:0;left:0;
+  background:#f0f0f0;
+  box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
