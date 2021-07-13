@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puzzle Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="screen-game" class="hidden">
+  <div id="menu">
+    <div class="container">
+      <div id="time">00:00</div>
+    </div>
+  </div>
+    <div class="container relative">
+      <img src="" alt="" id="img-target">
+      <div id="level-info">
+        <div id="best-time">Best Time: 00:00</div>
+      <div id="best-time">min moves: 0</div>
+    </div>
+    <canvas id="cnv"></canvas>
+  </div>
+</div>
+
+<div id="screen-main">
+  <div class="container">
+    <h1>PUZZLE<br>GAME</h1>
+    <div class="nav">
+      <div class="btn" id="to-screen-game-mode">Play</div>
+      <div class="btn" id="to-screen-settings">Settings</div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-game-mode" class="hidden">
+  <div class="container">
+    <div class="nav">
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
