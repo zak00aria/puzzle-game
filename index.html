@@ -14,15 +14,15 @@
 <div id="screen-game" class="hidden">
   <div id="menu">
     <div class="container">
-      <div id="time">00:00</div>
+      <div id="pause-btn"><span></span></div>
     </div>
   </div>
     <div class="container relative">
-      <img src="" alt="" id="img-target">
-      <div id="level-info">
-        <div id="best-time">Best Time: 00:00</div>
-      <div id="best-time">min moves: 0</div>
-    </div>
+      <div id="info-box">
+        <div id="time">Time: 00:00</div>
+        <div id="moves">Moves: 0  </div>
+        <div id="img"></div>
+      </div>
     <canvas id="cnv"></canvas>
   </div>
 </div>
@@ -40,6 +40,16 @@
 <div id="screen-game-mode" class="hidden">
   <div class="container">
     <div class="nav">
+    </div>
+  </div>
+</div>
+
+<div id="screen-pause-menu" class="hidden">
+  <div class="container">
+    <div class="nav">
+      <div class="btn" id="continue">Continue</div>
+      <div class="btn" id="restart">Restart</div>
+      <div class="btn" id="to-screen-main">Main</div>
     </div>
   </div>
 </div>
