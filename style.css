@@ -133,3 +133,46 @@ body {
   margin-top:50px;
   top:0;left:0;
 }
+#screen-shose-img>.container{
+  position:relative;
+  padding-top:0;padding-bottom:0;
+  overflow-x:hidden;
+  height:100vh;
+}
+#screen-shose-img #images{
+  white-space:nowrap;
+  padding-top:50px;
+  transition:.3s;
+}
+#screen-shose-img #images img{
+  width:calc(100% / 3 - 5px * 3);
+  max-width:100px;
+  height:60px;
+  border:none;
+  border-radius:4px;
+  box-shadow:0 2px 4px rgba(0,0,0,.6);
+  margin:15px 4px;
+} 
+#screen-shose-img #images>div{
+  display:inline-block;
+  white-space:normal;
+  text-align:center;
+  width:100%;
+}
+#screen-shose-img #controlls{
+  text-align:center;
+  position:fixed;
+  width:100%;
+  bottom:4px;left:0;
+}
+#screen-shose-img #controlls>div{
+  display:inline-block;
+  width:100px;
+  height:50px;
+  background:#353535;
+  color:#ccc;
+  border-radius:3px;
+  margin:0 8px;
+  font-size:50px;
+  line-height:50px;
+}
