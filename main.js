@@ -19,7 +19,11 @@ var game = {
     "https://1.bp.blogspot.com/-id-TyB4jNTo/YPC4B6bDj-I/AAAAAAAAAmc/8UHb-7xVgNs4igQ096YM_Dr-Lgw5M0XhACNcBGAsYHQ/$img_h/8526271172_06780037cc_b.jpg",
     "https://1.bp.blogspot.com/-6MPD9zsJ6cM/YPC4AIYtB7I/AAAAAAAAAmQ/4Dir0FqfwlsHIPjZA_Zc5or2WfJNlcW9gCNcBGAsYHQ/$img_h/1280px-Koppelpoort_Amersfoort_2008%25281%2529.jpg",
     "https://1.bp.blogspot.com/-_7L3oQvaOzY/YPC4BZ1RDcI/AAAAAAAAAmY/ylUIlcg_HswYFlUDDNmrOtU78nbfvLvOgCNcBGAsYHQ/$img_h/26%2Bowls%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
-    "https://1.bp.blogspot.com/-sTaJ0qmAoCE/YPC4BQqIoXI/AAAAAAAAAmU/fm68rUtIVng7OxC-oi4_ig5FaxYC5oRLQCNcBGAsYHQ/$img_h/2%2Btigers%2B%2528www.cute-pictures.blogspot.com%2529.jpg"
+    "https://1.bp.blogspot.com/-sTaJ0qmAoCE/YPC4BQqIoXI/AAAAAAAAAmU/fm68rUtIVng7OxC-oi4_ig5FaxYC5oRLQCNcBGAsYHQ/$img_h/2%2Btigers%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-z93LmZ-1TOQ/YPSmRtV0WlI/AAAAAAAAAm0/t5s-ZcZgpkAgY-fxSbio5x9huEGUeG1VQCNcBGAsYHQ/$img_h/31%2Bsea%2Banimal%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-RxVWpJrgE_U/YPSmS4X3toI/AAAAAAAAAm4/V1KmFSywk7kK_UkfbnvSr7z-LzP0FBxoQCNcBGAsYHQ/$img_h/20130725_01_001.jpg",
+     "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
+    "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
   ],
   state: 2,
   mode:0,
@@ -248,7 +252,7 @@ function drawImage(){
 
 function chek_result(){
   var n=0;
-  for(var i=0;i<game.grid.board.length-1;i++){
+  for(i=0;i<game.grid.board.length-1;i++){
     if(Math.abs(game.grid.board[i])+1==Math.abs(game.grid.board[i+1])){
       n++;
     }
@@ -286,6 +290,7 @@ function scrollimages(arg){
 
 function draw_images(){
   var imgs=document.getElementById("images");
+  if(imgs.children.length>0){return;}
   for(x=0;x<=Math.floor(game.images.length/9);x++){
     var div=document.createElement("div");
     for(i=x*9;i<9;i++){
