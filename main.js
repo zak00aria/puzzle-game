@@ -181,7 +181,7 @@ function draw_number(num,x,y,size,w,h){
   ctx.restore();
 }
 
-function move(event){
+/*function move(event){
   var x=event.offsetX;
   x=x>0 ? x : 0;
   var y=event.offsetY;
@@ -225,7 +225,7 @@ function move(event){
   }
   ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
   draw_board();
-}
+}*/
 
 function drawImage(){
   if(game.image.loaded){
@@ -312,4 +312,103 @@ function draw_images(){
   if(imgs.children.length==1){
     document.getElementById("controlls").setAttribute("class","hidden");
   }
+}
+
+function move(event) {
+  var xx=-1;
+  var yy=-1;
+  var x = event.offsetX;
+  x = x > 0 ? x : 0;
+  var y = event.offsetY;
+  y = y > 0 ? y : 0;
+
+  x /= cnv.offsetWidth / game.grid.x;
+  y /= cnv.offsetHeight / game.grid.y;
+  x = Math.floor(x);
+  y = Math.floor(y);
+  if(game.grid.board[x+y*game.grid.x]<0){
+    return;
+  }
+  if(x<game.grid.x){
+    for(xpos=x+1;xpos<game.grid.x;xpos++){
+      var i=xpos+y*game.grid.x;
+      if(game.grid.board[i]<0){
+        xx=xpos;
+        break;
+      }
+    }
+  }
+  if(xx<0 && x>0){
+    for (xpos = x - 1; xpos >= 0; xpos--) {
+      var i = xpos + y * game.grid.x;
+      if (game.grid.board[i] < 0) {
+        xx = xpos;
+        break;
+      }
+    }
+  }
+  if(xx!=-1){
+    if(xx>x){
+      for(xpos=x+y*game.grid.x;xpos<xx+y*game.grid.x;xpos++){
+        var mem=game.grid.board[xpos+1];
+        game.grid.board[xpos+1]=game.grid.board[x+y*game.grid.x];
+        game.grid.board[x+y*game.grid.x]=mem;
+      }
+    }else{
+      for (xpos = x + y * game.grid.x; xpos > xx + y * game.grid.x; xpos--) {
+        var mem = game.grid.board[xpos - 1];
+        game.grid.board[xpos - 1] = game.grid.board[x + y * game.grid.x];
+        game.grid.board[x + y * game.grid.x] = mem;
+      }
+    }
+  }
+  
+  /*++++++++++++++++++++++++++++++++++++++*/
+  /*++++++++++++++++++++++++++++++++++++++*/
+  
+  if(xx<0){
+    if (y < game.grid.y) {
+      for (ypos = y + 1; ypos < game.grid.y; ypos++) {
+        var i = x + ypos * game.grid.x;
+        if (game.grid.board[i] < 0) {
+          yy = ypos;
+          break;
+        }
+      }
+    }
+    if (yy < 0 && y > 0) {
+      for (ypos = y - 1; ypos >= 0; ypos--) {
+        var i = x + ypos * game.grid.x;
+        if (game.grid.board[i] < 0) {
+          yy = ypos;
+          break;
+        }
+      }
+    }
+    if (yy != -1) {
+      if (yy > y) {
+        for (ypos = x + y * game.grid.x; ypos < x + yy * game.grid.x; ypos+=game.grid.x) {
+          var mem = game.grid.board[ypos + game.grid.x];
+          game.grid.board[ypos + game.grid.x] = game.grid.board[x + y * game.grid.x];
+          game.grid.board[x + y * game.grid.x] = mem;
+        }
+      } else {
+        for (ypos = x + y * game.grid.x; ypos > x + yy * game.grid.x; ypos-=game.grid.x) {
+          var mem = game.grid.board[ypos - game.grid.x];
+          game.grid.board[ypos - game.grid.x] = game.grid.board[x + y * game.grid.x];
+          game.grid.board[x + y * game.grid.x] = mem;
+        }
+      }
+    }
+  }
+  
+  /*++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++*/
+  
+  ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
+  draw_board();
+}
+
+function get_empty_pos(pos){
+  
 }
