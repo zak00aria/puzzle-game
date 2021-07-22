@@ -2,7 +2,8 @@ var game = {
   states: {
     PAUSE: 0,
     PLAY: 1,
-    FINISH: 2
+    WIN: 2,
+    FINISH: 3
   },
   modes: [
     { name: "Easy", grid: [3, 3] },
@@ -24,7 +25,7 @@ var game = {
      "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
     "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
   ],
-  state: 2,
+  state: 3,
   mode:0,
   image:{
     loaded:false,
@@ -180,52 +181,6 @@ function draw_number(num,x,y,size,w,h){
   ctx.fillText(num,x+w/2,y+h/2+size/2.5);
   ctx.restore();
 }
-
-/*function move(event){
-  var x=event.offsetX;
-  x=x>0 ? x : 0;
-  var y=event.offsetY;
-  y=y>0 ? y : 0;
-  
-  x/=cnv.offsetWidth/game.grid.x;
-  y/=cnv.offsetHeight/game.grid.y;
-  x=Math.floor(x);
-  y=Math.floor(y);
-  var to_i=-1;
-  if(x<game.grid.x-1){
-    var i=x+1+game.grid.x*y;
-    if(game.grid.board[i]<0){to_i=i;}
-  }
-  if(x>0){
-    var i=x-1+game.grid.x*y;
-    if(game.grid.board[i]<0){to_i=i;}
-  }
-  if(y<game.grid.y-1){
-    var i=x+game.grid.x*(y+1);
-    if(game.grid.board[i]<0){to_i=i;}
-  }
-  if(y>0){
-    var i=x+game.grid.x*(y-1);
-    if(game.grid.board[i]<0){to_i=i;}
-  }
-  if(to_i>=0){
-    var i=x+game.grid.x*y;
-    var mem=game.grid.board[to_i];
-    game.grid.board[to_i]=game.grid.board[i];
-    game.grid.board[i]=mem;
-    game.moves++;
-    document.getElementById("moves").innerHTML="Moves: "+game.moves;
-    if(chek_result()){
-      game.grid.board[i]=-mem;
-      ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
-      draw_board();
-      game.state=game.states.FINISH;
-      alert("you win!");
-    }
-  }
-  ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
-  draw_board();
-}*/
 
 function drawImage(){
   if(game.image.loaded){
@@ -405,6 +360,16 @@ function move(event) {
   /*++++++++++++++++++++++++++++++++++++++
   ++++++++++++++++++++++++++++++++++++++*/
   
+  ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
+  draw_board();
+  if(xx>=0 || yy>=0){
+    game.moves++;
+    document.getElementById("moves").innerHTML="Moves: "+game.moves;
+    if(chek_result()){
+      game.state=game.states.WIN;
+      alert("you win!");
+    }
+  }
   ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
   draw_board();
 }
