@@ -2,8 +2,7 @@ var game = {
   states: {
     PAUSE: 0,
     PLAY: 1,
-    WIN: 2,
-    FINISH: 3
+    FINISH: 2
   },
   modes: [
     { name: "Easy", grid: [3, 3] },
@@ -25,7 +24,7 @@ var game = {
      "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
     "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
   ],
-  state: 3,
+  state: 2,
   mode:0,
   image:{
     loaded:false,
@@ -182,6 +181,52 @@ function draw_number(num,x,y,size,w,h){
   ctx.restore();
 }
 
+function move(event){
+  var x=event.offsetX;
+  x=x>0 ? x : 0;
+  var y=event.offsetY;
+  y=y>0 ? y : 0;
+  
+  x/=cnv.offsetWidth/game.grid.x;
+  y/=cnv.offsetHeight/game.grid.y;
+  x=Math.floor(x);
+  y=Math.floor(y);
+  var to_i=-1;
+  if(x<game.grid.x-1){
+    var i=x+1+game.grid.x*y;
+    if(game.grid.board[i]<0){to_i=i;}
+  }
+  if(x>0){
+    var i=x-1+game.grid.x*y;
+    if(game.grid.board[i]<0){to_i=i;}
+  }
+  if(y<game.grid.y-1){
+    var i=x+game.grid.x*(y+1);
+    if(game.grid.board[i]<0){to_i=i;}
+  }
+  if(y>0){
+    var i=x+game.grid.x*(y-1);
+    if(game.grid.board[i]<0){to_i=i;}
+  }
+  if(to_i>=0){
+    var i=x+game.grid.x*y;
+    var mem=game.grid.board[to_i];
+    game.grid.board[to_i]=game.grid.board[i];
+    game.grid.board[i]=mem;
+    game.moves++;
+    document.getElementById("moves").innerHTML="Moves: "+game.moves;
+    if(chek_result()){
+      game.grid.board[i]=-mem;
+      ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
+      draw_board();
+      game.state=game.states.FINISH;
+      alert("you win!");
+    }
+  }
+  ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
+  draw_board();
+}
+
 function drawImage(){
   if(game.image.loaded){
     if(img_target.getAttribute("src")==game.image.src){
@@ -240,6 +285,16 @@ function scrollimages(arg){
   x+=imgs_w*arg+arg*imgs.offsetLeft/2;
   imgs.style="transform:translateX("+x+"px)";
   imgs.setAttribute("x",""+x);
+  if(x==0){
+    document.getElementById("controlls").children[0].style="opacity:.4;pointer-events:none";
+  }else if(x==-imgs_w-imgs.offsetLeft/2){
+    document.getElementById("controlls").children[0].style="";
+  }
+  if(x==(-imgs_w*(n-1))-(imgs.offsetLeft/2)*(n-1)){
+    document.getElementById("controlls").children[1].style="opacity:.4;pointer-events:none";
+  }else if(x==(-imgs_w*(n-2))-(imgs.offsetLeft/2)*(n-2)){
+    document.getElementById("controlls").children[1].style="";
+  }
 }
 
 function draw_images(){
@@ -267,113 +322,4 @@ function draw_images(){
   if(imgs.children.length==1){
     document.getElementById("controlls").setAttribute("class","hidden");
   }
-}
-
-function move(event) {
-  var xx=-1;
-  var yy=-1;
-  var x = event.offsetX;
-  x = x > 0 ? x : 0;
-  var y = event.offsetY;
-  y = y > 0 ? y : 0;
-
-  x /= cnv.offsetWidth / game.grid.x;
-  y /= cnv.offsetHeight / game.grid.y;
-  x = Math.floor(x);
-  y = Math.floor(y);
-  if(game.grid.board[x+y*game.grid.x]<0){
-    return;
-  }
-  if(x<game.grid.x){
-    for(xpos=x+1;xpos<game.grid.x;xpos++){
-      var i=xpos+y*game.grid.x;
-      if(game.grid.board[i]<0){
-        xx=xpos;
-        break;
-      }
-    }
-  }
-  if(xx<0 && x>0){
-    for (xpos = x - 1; xpos >= 0; xpos--) {
-      var i = xpos + y * game.grid.x;
-      if (game.grid.board[i] < 0) {
-        xx = xpos;
-        break;
-      }
-    }
-  }
-  if(xx!=-1){
-    if(xx>x){
-      for(xpos=x+y*game.grid.x;xpos<xx+y*game.grid.x;xpos++){
-        var mem=game.grid.board[xpos+1];
-        game.grid.board[xpos+1]=game.grid.board[x+y*game.grid.x];
-        game.grid.board[x+y*game.grid.x]=mem;
-      }
-    }else{
-      for (xpos = x + y * game.grid.x; xpos > xx + y * game.grid.x; xpos--) {
-        var mem = game.grid.board[xpos - 1];
-        game.grid.board[xpos - 1] = game.grid.board[x + y * game.grid.x];
-        game.grid.board[x + y * game.grid.x] = mem;
-      }
-    }
-  }
-  
-  /*++++++++++++++++++++++++++++++++++++++*/
-  /*++++++++++++++++++++++++++++++++++++++*/
-  
-  if(xx<0){
-    if (y < game.grid.y) {
-      for (ypos = y + 1; ypos < game.grid.y; ypos++) {
-        var i = x + ypos * game.grid.x;
-        if (game.grid.board[i] < 0) {
-          yy = ypos;
-          break;
-        }
-      }
-    }
-    if (yy < 0 && y > 0) {
-      for (ypos = y - 1; ypos >= 0; ypos--) {
-        var i = x + ypos * game.grid.x;
-        if (game.grid.board[i] < 0) {
-          yy = ypos;
-          break;
-        }
-      }
-    }
-    if (yy != -1) {
-      if (yy > y) {
-        for (ypos = x + y * game.grid.x; ypos < x + yy * game.grid.x; ypos+=game.grid.x) {
-          var mem = game.grid.board[ypos + game.grid.x];
-          game.grid.board[ypos + game.grid.x] = game.grid.board[x + y * game.grid.x];
-          game.grid.board[x + y * game.grid.x] = mem;
-        }
-      } else {
-        for (ypos = x + y * game.grid.x; ypos > x + yy * game.grid.x; ypos-=game.grid.x) {
-          var mem = game.grid.board[ypos - game.grid.x];
-          game.grid.board[ypos - game.grid.x] = game.grid.board[x + y * game.grid.x];
-          game.grid.board[x + y * game.grid.x] = mem;
-        }
-      }
-    }
-  }
-  
-  /*++++++++++++++++++++++++++++++++++++++
-  ++++++++++++++++++++++++++++++++++++++*/
-  
-  ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
-  draw_board();
-  if(xx>=0 || yy>=0){
-    game.moves++;
-    document.getElementById("moves").innerHTML="Moves: "+game.moves;
-    if(chek_result()){
-      game.state=game.states.WIN;
-      alert("you win!");
-    }
-  }
-  ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
-  draw_board();
-}
-
-function get_empty_pos(pos){
-  
 }
