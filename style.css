@@ -155,7 +155,7 @@ body {
 } 
 #screen-shose-img #images .no-img{
   display: inline-block;
-  opacity: 0;
+  opacity:0;
 }
 #screen-shose-img #images>div{
   display:inline-block;

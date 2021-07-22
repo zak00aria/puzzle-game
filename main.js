@@ -303,10 +303,7 @@ function draw_images(){
         }
       }else{
         var img=document.createElement("div");
-        //img.src="#";
-        //img.src="https://1.bp.blogspot.com/-uAdar-j-amE/YPBXu4GG9uI/AAAAAAAAAmI/K2Ff5KUKomcdKT7cIMpDEdgBoVnpqhEpQCNcBGAsYHQ/h100/earth-rock-africa-algeria-wallpaper-thumb.jpg";
         img.setAttribute("class","no-img");
-        //img.style="display:inline-block;opacity:1;";
       }
       div.append(img);
     }
