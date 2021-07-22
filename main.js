@@ -14,7 +14,6 @@ var game = {
     "https://1.bp.blogspot.com/-7YEga-YmQ5o/YPBSGkOR27I/AAAAAAAAAl4/TauUifEfGDILEJYQxbabMjOUJgb_vSwbgCNcBGAsYHQ/$img_h/2%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
     "https://1.bp.blogspot.com/-WSZlOaR6_-M/YPBVs_zclCI/AAAAAAAAAmA/jdi9wnfMgxkjGnwy2mcY15KK_UCGk0SDgCNcBGAsYHQ/$img_h/baby-animals-kittens-cat-wallpaper-thumb.jpg",
     "https://1.bp.blogspot.com/-uAdar-j-amE/YPBXu4GG9uI/AAAAAAAAAmI/K2Ff5KUKomcdKT7cIMpDEdgBoVnpqhEpQCNcBGAsYHQ/$img_h/earth-rock-africa-algeria-wallpaper-thumb.jpg",
-    
     "https://1.bp.blogspot.com/-w2uMKe4COdo/YPC4CK-WlMI/AAAAAAAAAmg/UOxs0fMMn1kdEnVK0-3SmubXkwAFD_NrwCNcBGAsYHQ/$img_h/Eagle_Owl.jpg",
     "https://1.bp.blogspot.com/-id-TyB4jNTo/YPC4B6bDj-I/AAAAAAAAAmc/8UHb-7xVgNs4igQ096YM_Dr-Lgw5M0XhACNcBGAsYHQ/$img_h/8526271172_06780037cc_b.jpg",
     "https://1.bp.blogspot.com/-6MPD9zsJ6cM/YPC4AIYtB7I/AAAAAAAAAmQ/4Dir0FqfwlsHIPjZA_Zc5or2WfJNlcW9gCNcBGAsYHQ/$img_h/1280px-Koppelpoort_Amersfoort_2008%25281%2529.jpg",
@@ -293,19 +292,21 @@ function draw_images(){
   if(imgs.children.length>0){return;}
   for(x=0;x<=Math.floor(game.images.length/9);x++){
     var div=document.createElement("div");
-    for(i=x*9;i<9;i++){
+    for(i=x*9;i<x*9+9;i++){
       if(game.images[i]){
-      var src=game.images[i];
-      var img=document.createElement("img");
-      img.src=src.replace("/$img_h","/h100");
-      img.onclick=function(){
-      game.image.src=this.src.replace("/h100","");
-      openScreen("screen-shose-img","screen-game-mode");
-      }
+        var src=game.images[i];
+        var img=document.createElement("img");
+        img.src=src.replace("/$img_h","/h100");
+        img.onclick=function(){
+          game.image.src=this.src.replace("/h100","");
+          openScreen("screen-shose-img","screen-game-mode");
+        }
       }else{
-      var img=document.createElement("img");
-      img.src="#";
-      img.style="opacity:0;user-select:none";
+        var img=document.createElement("div");
+        //img.src="#";
+        //img.src="https://1.bp.blogspot.com/-uAdar-j-amE/YPBXu4GG9uI/AAAAAAAAAmI/K2Ff5KUKomcdKT7cIMpDEdgBoVnpqhEpQCNcBGAsYHQ/h100/earth-rock-africa-algeria-wallpaper-thumb.jpg";
+        img.setAttribute("class","no-img");
+        //img.style="display:inline-block;opacity:1;";
       }
       div.append(img);
     }

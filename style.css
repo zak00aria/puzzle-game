@@ -144,7 +144,7 @@ body {
   padding-top:50px;
   transition:.3s;
 }
-#screen-shose-img #images img{
+#screen-shose-img #images img, #screen-shose-img #images .no-img{
   width:calc(100% / 3 - 5px * 3);
   max-width:100px;
   height:60px;
@@ -153,6 +153,10 @@ body {
   box-shadow:0 2px 4px rgba(0,0,0,.6);
   margin:15px 4px;
 } 
+#screen-shose-img #images .no-img{
+  display: inline-block;
+  opacity: 0;
+}
 #screen-shose-img #images>div{
   display:inline-block;
   white-space:normal;
