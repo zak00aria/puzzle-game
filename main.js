@@ -89,20 +89,38 @@ function init_board(){
   game.grid.board=[];
   game.grid.x=game.modes[game.mode].grid[0];
   game.grid.y=game.modes[game.mode].grid[1];
-  var rnum=Math.floor(Math.random()*(game.grid.x*game.grid.y-1));
-  for(var i=0;i<game.grid.x*game.grid.y;i++){
+  var length=game.grid.x*game.grid.y;
+  var half_length=Math.floor(length/2);
+  var rnum=Math.floor(Math.random()*(length-1));
+  for(var i=0;i<length;i++){
+    /*
     var n;
     do{
       n=1+Math.round(Math.random()*(game.grid.x*game.grid.y-1));
     }while(game.grid.board.indexOf(n)>=0);
     game.grid.board.push(n);
+    */
+    if(i<=half_length){
+      game.grid.board.push(length-i);
+    }else{
+      game.grid.board.push(i-half_length);
+    }
   }
   game.grid.board[rnum]*=-1;
   w=cnv.offsetWidth/game.grid.x;
   w_img=img_target.naturalWidth/game.grid.x;
   h=cnv.offsetHeight/game.grid.y;
   h_img=img_target.naturalHeight/game.grid.y;
-  
+  random_moves();
+}
+
+function random_moves(){
+  var state=game.state;
+  game.state=game.states.PAUSE;
+  for (a = 0; a < game.grid.board.length*2; a++) {
+    move({ offsetX: Math.random() * cnv.offsetWidth, offsetY: Math.random() * cnv.offsetHeight });
+  }
+  game.state=state;
 }
 
 function draw_board(){
@@ -119,7 +137,7 @@ function draw_board(){
     ctx.drawImage(img_target,x_img,y_img,w_img,h_img,x,y,w,h);
     ctx.beginPath();
     ctx.rect(x,y,w,h);
-    if(game.time%20<3){draw_number(n,x,y,40*(1-(game.mode/10)),w,h);}
+    if(game.time%20<3 && game.state!=game.states.WIN){draw_number(n,x,y,40*(1-(game.mode/10)),w,h);}
     ctx.stroke();
   }
 }
@@ -235,11 +253,16 @@ function move(event) {
 
   ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
   draw_board();
-  if(xx>=0 || yy>=0){
+  if((xx>=0 || yy>=0) && game.state==game.states.PLAY){
     game.moves++;
     document.getElementById("moves").innerHTML="Moves: "+game.moves;
     if(chek_result()){
-      game.grid.board[x+x*y]*=-1;
+      for(i=0;i<game.grid.board.length;i++){
+        if(game.grid.board[i]<0){
+          game.grid.board[i]*=-1;
+          break;
+        }
+      }
       game.state=game.states.WIN;
       alert("you win!");
     }
