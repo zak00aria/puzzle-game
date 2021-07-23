@@ -1,4 +1,11 @@
 var img_target,ctx,cnv,game;
+var w,w_img,h,h_img;
+
+/*var w=cnv.offsetWidth/game.grid.x;
+var w_img=img_target.naturalWidth/game.grid.x;
+var h=cnv.offsetHeight/game.grid.y;
+var h_img=img_target.naturalHeight/game.grid.y;
+*/
 
 onload=function(){
 
@@ -57,10 +64,6 @@ for(i=0;i<game.modes.length;i++){
 }
 /* end draw game modes */
 
-/* draw images */
-
-/* end draw images */
-
 cnv=document.getElementById("cnv");
 cnv.onclick=function(event){
   if(game.state==game.states.PLAY){
@@ -90,30 +93,30 @@ function init_board(){
     game.grid.board.push(n);
   }
   game.grid.board[rnum]*=-1;
+  w=cnv.offsetWidth/game.grid.x;
+  w_img=img_target.naturalWidth/game.grid.x;
+  h=cnv.offsetHeight/game.grid.y;
+  h_img=img_target.naturalHeight/game.grid.y;
+  
 }
 
 function draw_board(){
   ctx.strokeStyle="rgba(0,0,0,.6)";
   ctx.fillStyle="#fff";
   ctx.lineWidth="2";
-  var w=cnv.offsetWidth/game.grid.x;
-  var w_img=img_target.naturalWidth/game.grid.x;
-  var h=cnv.offsetHeight/game.grid.y;
-  var h_img=img_target.naturalHeight/game.grid.y;
-  for(var i in game.grid.board){
-    if(game.grid.board[i]<0){continue;}
+  for(i in game.grid.board){
     var n=game.grid.board[i];
-    var x=w;
+    if(n<0){continue;}
+    var x=w*(i%game.grid.x);/**/
     var x_img=w_img*((n-1)%game.grid.x);
-    x*=i%game.grid.x;
-    var y=h;
+    var y=h*Math.floor(i/game.grid.x);
     var y_img=h_img*Math.floor((n-1)/game.grid.x);
-    y*=Math.floor(i/game.grid.x);
     ctx.drawImage(img_target,x_img,y_img,w_img,h_img,x,y,w,h);
+    ctx.beginPath();
     ctx.rect(x,y,w,h);
     if(game.time%20<3){draw_number(n,x,y,40*(1-(game.mode/10)),w,h);}
+    ctx.stroke();
   }
-  ctx.stroke();
 }
 
 function draw_number(num,x,y,size,w,h){
@@ -145,6 +148,10 @@ function move(event) {
   if(game.grid.board[x+y*game.grid.x]<0){
     return;
   }
+  
+  /*++++++++++++++++++++++++++++++++++++++*/
+  /*++++++++++++++++++++++++++++++++++++++*/
+  
   if(x<game.grid.x){
     for(xpos=x+1;xpos<game.grid.x;xpos++){
       var i=xpos+y*game.grid.x;
@@ -336,7 +343,8 @@ game = {
   states: {
     PAUSE: 0,
     PLAY: 1,
-    FINISH: 2
+    FINISH: 2,
+    WIN: 3
   },
   modes: [
     { name: "Easy", grid: [3, 3] },
