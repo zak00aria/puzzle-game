@@ -24,11 +24,6 @@ body {
   width:60%;
   margin:10px auto;
   border-radius:40px;
-  /*background:linear-gradient(40deg,#f80,#fc0);
-  color:#f50;
-  border:solid 6px #fb0;
-  box-shadow:0 2px 5px rgba(0,0,0,.3);
-  text-shadow:1px 1px 0 rgba(0,0,0,.08);*/
   background:linear-gradient(40deg,#222,#888);
   color:#ccc;
   border:solid 6px #999;

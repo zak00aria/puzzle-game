@@ -37,6 +37,17 @@ document.getElementById("restart").onclick=function(){
   game.start();
 }
 
+document.getElementById("to-screen-game-mode").onclick = function() {
+  openScreen("screen-pause-menu", "screen-game-mode");
+  game.state = game.states.FINISHA;
+  clearInterval(game.interval);
+  game.time = 0;
+  game.moves = 0;
+  game.image.loaded = false;
+  document.getElementById("time").innerHTML = "Time: 00:00";
+  document.getElementById("moves").innerHTML = "Moves: 0";
+}
+
 document.getElementById("to-screen-main").onclick=function(){
   openScreen("screen-pause-menu", "screen-main");
   game.state=game.states.FINISHA;
