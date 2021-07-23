@@ -1,60 +1,4 @@
-var game = {
-  states: {
-    PAUSE: 0,
-    PLAY: 1,
-    FINISH: 2
-  },
-  modes: [
-    { name: "Easy", grid: [3, 3] },
-    { name: "Normal", grid: [5, 4] },
-    { name: "Hard", grid: [6, 5] },
-    { name: "Hard++", grid: [7, 6] }
-  ],
-  images:[
-    "https://1.bp.blogspot.com/-7YEga-YmQ5o/YPBSGkOR27I/AAAAAAAAAl4/TauUifEfGDILEJYQxbabMjOUJgb_vSwbgCNcBGAsYHQ/$img_h/2%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
-    "https://1.bp.blogspot.com/-WSZlOaR6_-M/YPBVs_zclCI/AAAAAAAAAmA/jdi9wnfMgxkjGnwy2mcY15KK_UCGk0SDgCNcBGAsYHQ/$img_h/baby-animals-kittens-cat-wallpaper-thumb.jpg",
-    "https://1.bp.blogspot.com/-uAdar-j-amE/YPBXu4GG9uI/AAAAAAAAAmI/K2Ff5KUKomcdKT7cIMpDEdgBoVnpqhEpQCNcBGAsYHQ/$img_h/earth-rock-africa-algeria-wallpaper-thumb.jpg",
-    "https://1.bp.blogspot.com/-w2uMKe4COdo/YPC4CK-WlMI/AAAAAAAAAmg/UOxs0fMMn1kdEnVK0-3SmubXkwAFD_NrwCNcBGAsYHQ/$img_h/Eagle_Owl.jpg",
-    "https://1.bp.blogspot.com/-id-TyB4jNTo/YPC4B6bDj-I/AAAAAAAAAmc/8UHb-7xVgNs4igQ096YM_Dr-Lgw5M0XhACNcBGAsYHQ/$img_h/8526271172_06780037cc_b.jpg",
-    "https://1.bp.blogspot.com/-6MPD9zsJ6cM/YPC4AIYtB7I/AAAAAAAAAmQ/4Dir0FqfwlsHIPjZA_Zc5or2WfJNlcW9gCNcBGAsYHQ/$img_h/1280px-Koppelpoort_Amersfoort_2008%25281%2529.jpg",
-    "https://1.bp.blogspot.com/-_7L3oQvaOzY/YPC4BZ1RDcI/AAAAAAAAAmY/ylUIlcg_HswYFlUDDNmrOtU78nbfvLvOgCNcBGAsYHQ/$img_h/26%2Bowls%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
-    "https://1.bp.blogspot.com/-sTaJ0qmAoCE/YPC4BQqIoXI/AAAAAAAAAmU/fm68rUtIVng7OxC-oi4_ig5FaxYC5oRLQCNcBGAsYHQ/$img_h/2%2Btigers%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
-    "https://1.bp.blogspot.com/-z93LmZ-1TOQ/YPSmRtV0WlI/AAAAAAAAAm0/t5s-ZcZgpkAgY-fxSbio5x9huEGUeG1VQCNcBGAsYHQ/$img_h/31%2Bsea%2Banimal%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
-    "https://1.bp.blogspot.com/-RxVWpJrgE_U/YPSmS4X3toI/AAAAAAAAAm4/V1KmFSywk7kK_UkfbnvSr7z-LzP0FBxoQCNcBGAsYHQ/$img_h/20130725_01_001.jpg",
-     "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
-    "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
-  ],
-  state: 2,
-  mode:0,
-  image:{
-    loaded:false,
-    src:"https://1.bp.blogspot.com/-7YEga-YmQ5o/YPBSGkOR27I/AAAAAAAAAl4/TauUifEfGDILEJYQxbabMjOUJgb_vSwbgCNcBGAsYHQ/2%2B%2528www.cute-pictures.blogspot.com%2529.jpg"
-  },
-  grid: {
-    x: 0,
-    y: 0,
-    board: []
-  },
-  time: 0,
-  moves:0,
-  imterval: null,
-  start: function() {
-    game.moves=0;
-    game.time=0;
-    drawImage();
-    game.interval = setInterval(function() {
-      if(game.state==game.states.PLAY && game.image.loaded){
-        game.update();
-      }
-    }, 1000);
-  },
-  update: function() {
-    draw_board();
-    game.time+=1;
-    document.getElementById("time").innerHTML = "Time: "+timeFormat(Math.floor(game.time));
-  }
-};
-var img_target,ctx,cnv;
+var img_target,ctx,cnv,game;
 
 onload=function(){
 
@@ -63,14 +7,18 @@ document.getElementById("to-screen-shose-img").onclick=function(){
   draw_images();
 };
 document.getElementById("pause-btn").onclick=function(){
-  game.state=game.states.PAUSE;
+  if(game.state!=game.states.WIN){
+    game.state=game.states.PAUSE;
+  }
   openScreen("screen-game", "screen-pause-menu");
 };
 
 /*pause menu navigation*/
 document.getElementById("continue").onclick=function(){
   openScreen("screen-pause-menu", "screen-game");
-  game.state=game.states.PLAY;
+  if(game.state==game.states.PAUSE){
+    game.state=game.states.PLAY;
+  }
 };
 
 document.getElementById("restart").onclick=function(){
@@ -88,6 +36,7 @@ document.getElementById("to-screen-main").onclick=function(){
   clearInterval(game.interval);
   game.time=0;
   game.moves=0;
+  game.image.loaded=false;
   document.getElementById("time").innerHTML="Time: 00:00";
   document.getElementById("moves").innerHTML="Moves: 0";
 }
@@ -382,3 +331,60 @@ function draw_images(){
     document.getElementById("controlls").setAttribute("class","hidden");
   }
 }
+
+game = {
+  states: {
+    PAUSE: 0,
+    PLAY: 1,
+    FINISH: 2
+  },
+  modes: [
+    { name: "Easy", grid: [3, 3] },
+    { name: "Normal", grid: [4, 4] },
+    { name: "Hard", grid: [5, 5] },
+    { name: "Hard++", grid: [6, 6] }
+  ],
+  images:[
+    "https://1.bp.blogspot.com/-7YEga-YmQ5o/YPBSGkOR27I/AAAAAAAAAl4/TauUifEfGDILEJYQxbabMjOUJgb_vSwbgCNcBGAsYHQ/$img_h/2%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-WSZlOaR6_-M/YPBVs_zclCI/AAAAAAAAAmA/jdi9wnfMgxkjGnwy2mcY15KK_UCGk0SDgCNcBGAsYHQ/$img_h/baby-animals-kittens-cat-wallpaper-thumb.jpg",
+    "https://1.bp.blogspot.com/-uAdar-j-amE/YPBXu4GG9uI/AAAAAAAAAmI/K2Ff5KUKomcdKT7cIMpDEdgBoVnpqhEpQCNcBGAsYHQ/$img_h/earth-rock-africa-algeria-wallpaper-thumb.jpg",
+    "https://1.bp.blogspot.com/-w2uMKe4COdo/YPC4CK-WlMI/AAAAAAAAAmg/UOxs0fMMn1kdEnVK0-3SmubXkwAFD_NrwCNcBGAsYHQ/$img_h/Eagle_Owl.jpg",
+    "https://1.bp.blogspot.com/-id-TyB4jNTo/YPC4B6bDj-I/AAAAAAAAAmc/8UHb-7xVgNs4igQ096YM_Dr-Lgw5M0XhACNcBGAsYHQ/$img_h/8526271172_06780037cc_b.jpg",
+    "https://1.bp.blogspot.com/-6MPD9zsJ6cM/YPC4AIYtB7I/AAAAAAAAAmQ/4Dir0FqfwlsHIPjZA_Zc5or2WfJNlcW9gCNcBGAsYHQ/$img_h/1280px-Koppelpoort_Amersfoort_2008%25281%2529.jpg",
+    "https://1.bp.blogspot.com/-_7L3oQvaOzY/YPC4BZ1RDcI/AAAAAAAAAmY/ylUIlcg_HswYFlUDDNmrOtU78nbfvLvOgCNcBGAsYHQ/$img_h/26%2Bowls%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-sTaJ0qmAoCE/YPC4BQqIoXI/AAAAAAAAAmU/fm68rUtIVng7OxC-oi4_ig5FaxYC5oRLQCNcBGAsYHQ/$img_h/2%2Btigers%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-z93LmZ-1TOQ/YPSmRtV0WlI/AAAAAAAAAm0/t5s-ZcZgpkAgY-fxSbio5x9huEGUeG1VQCNcBGAsYHQ/$img_h/31%2Bsea%2Banimal%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
+    "https://1.bp.blogspot.com/-RxVWpJrgE_U/YPSmS4X3toI/AAAAAAAAAm4/V1KmFSywk7kK_UkfbnvSr7z-LzP0FBxoQCNcBGAsYHQ/$img_h/20130725_01_001.jpg",
+     "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
+    "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
+  ],
+  state: 2,
+  mode:0,
+  image:{
+    loaded:false,
+    src:"https://1.bp.blogspot.com/-7YEga-YmQ5o/YPBSGkOR27I/AAAAAAAAAl4/TauUifEfGDILEJYQxbabMjOUJgb_vSwbgCNcBGAsYHQ/2%2B%2528www.cute-pictures.blogspot.com%2529.jpg"
+  },
+  grid: {
+    x: 0,
+    y: 0,
+    board: []
+  },
+  time: 0,
+  moves:0,
+  imterval: null,
+  start: function() {
+    game.moves=0;
+    game.time=0;
+    drawImage();
+    game.interval = setInterval(function() {
+      if(game.state==game.states.PLAY && game.image.loaded){
+        game.update();
+      }
+    }, 1000);
+  },
+  update: function() {
+    draw_board();
+    game.time+=1;
+    document.getElementById("time").innerText = "Time: "+timeFormat(game.time);
+  }
+};
