@@ -75,18 +75,21 @@ body {
   margin:4px 0 8px;
   border:solid 1px rgba(0,0,0,.6);
 }
-#time,#moves{
+#time,#moves,#mode{
   position:absolute;
   padding:10px 0;
   font-size:20px;
   line-height:1.4; 
   top:50%;
-  transform:translateY(-75%);
+  transform:translateY(0%);
   left:0;
   white-space:nowrap;
 }
+#time{
+  transform:translateY(-100%);
+}
 #moves{
-  transform:translateY(-25%);
+  transform:translateY(-50%);
 }
 #menu{
   position:relative;
