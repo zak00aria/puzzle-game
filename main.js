@@ -63,6 +63,7 @@ for(i=0;i<game.modes.length;i++){
   btn.onclick=function(){
     game.mode=this.getAttribute("i");
     openScreen("screen-game-mode", "screen-game");
+    document.getElementById("mode").innerText="Mode: "+game.modes[game.mode].name;
     game.start();
   }
   document.getElementById("screen-game-mode").getElementsByClassName("nav")[0].append(btn);
@@ -130,7 +131,7 @@ function draw_board(){
   for(i=0;i<game.grid.board.length;i++){
     var n=game.grid.board[i];
     if(n<0){continue;}
-    var x=w*(i%game.grid.x);/**/
+    var x=w*(i%game.grid.x);
     var x_img=w_img*((n-1)%game.grid.x);
     var y=h*Math.floor(i/game.grid.x);
     var y_img=h_img*Math.floor((n-1)/game.grid.x);

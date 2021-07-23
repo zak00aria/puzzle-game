@@ -83,6 +83,7 @@ body {
   top:50%;
   transform:translateY(0%);
   left:0;
+  direction: ltr;
   white-space:nowrap;
 }
 #time{
