@@ -1,12 +1,6 @@
 var img_target,ctx,cnv,game;
 var w,w_img,h,h_img;
 
-/*var w=cnv.offsetWidth/game.grid.x;
-var w_img=img_target.naturalWidth/game.grid.x;
-var h=cnv.offsetHeight/game.grid.y;
-var h_img=img_target.naturalHeight/game.grid.y;
-*/
-
 onload=function(){
 
 document.getElementById("to-screen-shose-img").onclick=function(){
@@ -115,7 +109,7 @@ function draw_board(){
   ctx.strokeStyle="rgba(0,0,0,.6)";
   ctx.fillStyle="#fff";
   ctx.lineWidth="2";
-  for(i in game.grid.board){
+  for(i=0;i<game.grid.board.length;i++){
     var n=game.grid.board[i];
     if(n<0){continue;}
     var x=w*(i%game.grid.x);/**/
@@ -245,6 +239,7 @@ function move(event) {
     game.moves++;
     document.getElementById("moves").innerHTML="Moves: "+game.moves;
     if(chek_result()){
+      game.grid.board[x+x*y]*=-1;
       game.state=game.states.WIN;
       alert("you win!");
     }
