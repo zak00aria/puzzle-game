@@ -72,7 +72,7 @@ body {
 }
 #img-target{
   height:100px;
-  margin:4px 0 8px;
+  margin:12px 0 8px;
   border:solid 1px rgba(0,0,0,.6);
 }
 #time,#moves,#mode{
@@ -192,7 +192,6 @@ body {
   transform:scale(1);
   transition:.3s;
 }
-
 #screen-shose-img #controlls>div:active{
   transform:scale(.95);
   transition:0s;
