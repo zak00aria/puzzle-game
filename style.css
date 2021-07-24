@@ -138,7 +138,13 @@ body {
 #screen-shose-img #images{
   white-space:nowrap;
   padding-top:50px;
+}
+#screen-shose-img #images,#screen-shose-img #images>div{
   transition:.3s;
+}
+#screen-shose-img #images>div.h{
+  transform:scale(.7);
+  opacity:.3;
 }
 #screen-shose-img #images img, #screen-shose-img #images .no-img{
   width:calc(100% / 3 - 5px * 3);
@@ -158,6 +164,8 @@ body {
   white-space:normal;
   text-align:center;
   width:100%;
+  transform: scale(1);
+  opacity: 1;
 }
 #screen-shose-img #controlls{
   text-align:center;

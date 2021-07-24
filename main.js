@@ -87,6 +87,7 @@ function set_canvas_size(){
 
 function init_board(){
   set_canvas_size();
+  ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
   game.grid.board=[];
   game.grid.x=game.modes[game.mode].grid[0];
   game.grid.y=game.modes[game.mode].grid[1];
@@ -327,7 +328,10 @@ function scrollimages(arg){
   var x=1*imgs.getAttribute("x");
   if(x==0 && arg>0) return;
   if(x==-imgs_w*(n-1)-(imgs.offsetLeft/2*(n-1)) && arg<0) return;
+  var old_x=x;
   x+=imgs_w*arg+arg*imgs.offsetLeft/2;
+  imgs.children[Math.floor(Math.abs(old_x/imgs_w))].setAttribute("class","h");
+  imgs.children[Math.floor(Math.abs(x/imgs_w))].setAttribute("class","");
   imgs.style="transform:translateX("+x+"px)";
   imgs.setAttribute("x",""+x);
   if(x==0){
@@ -347,6 +351,9 @@ function draw_images(){
   if(imgs.children.length>0){return;}
   for(x=0;x<=Math.floor(game.images.length/9);x++){
     var div=document.createElement("div");
+    if(x>0){
+      div.setAttribute("class","h");
+    }
     for(i=x*9;i<x*9+9;i++){
       if(game.images[i]){
         var src=game.images[i];
