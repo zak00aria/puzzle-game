@@ -154,10 +154,16 @@ body {
   border-radius:4px;
   box-shadow:0 2px 4px rgba(0,0,0,.6);
   margin:15px 4px;
+  transform:scale(1);
+  transition:.3s;
 } 
 #screen-shose-img #images .no-img{
   display: inline-block;
   opacity:0;
+}
+#screen-shose-img #images img:active{
+  transform:scale(.96);
+  transition:0s;
 }
 #screen-shose-img #images>div{
   display:inline-block;
@@ -171,7 +177,7 @@ body {
   text-align:center;
   position:fixed;
   width:100%;
-  bottom:4px;left:0;
+  top:380px;left:0;
 }
 #screen-shose-img #controlls>div{
   display:inline-block;
@@ -183,4 +189,11 @@ body {
   margin:0 8px;
   font-size:50px;
   line-height:50px;
+  transform:scale(1);
+  transition:.3s;
+}
+
+#screen-shose-img #controlls>div:active{
+  transform:scale(.95);
+  transition:0s;
 }
