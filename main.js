@@ -401,7 +401,10 @@ game = {
     "https://1.bp.blogspot.com/-z93LmZ-1TOQ/YPSmRtV0WlI/AAAAAAAAAm0/t5s-ZcZgpkAgY-fxSbio5x9huEGUeG1VQCNcBGAsYHQ/$img_h/31%2Bsea%2Banimal%2B%2528www.cute-pictures.blogspot.com%2529.jpg",
     "https://1.bp.blogspot.com/-RxVWpJrgE_U/YPSmS4X3toI/AAAAAAAAAm4/V1KmFSywk7kK_UkfbnvSr7z-LzP0FBxoQCNcBGAsYHQ/$img_h/20130725_01_001.jpg",
      "https://1.bp.blogspot.com/-IlbW5LKw7bw/YPSmTFVhAxI/AAAAAAAAAm8/NefYksCB6s4G3Zmr8d2CQy2B4B6HttYZQCNcBGAsYHQ/$img_h/Pictures%2Bof%2BTruly%2BAdorable%2BAnimals%2Bin%2BSnow%2B18.jpg",
-    "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg"
+    "https://1.bp.blogspot.com/-kYqDliX-TnU/YPSmTNOg7MI/AAAAAAAAAnA/SgZm4TX6bOw1AT0HB48mIXYbgcxn9o2RgCNcBGAsYHQ/$img_h/tropical_beach_by_tomprante_d9fynnw-pre.jpg",
+    "https://1.bp.blogspot.com/-abekc-xNyqE/YPxdef1m7VI/AAAAAAAAAng/ccaEK3o5wB8spT4LL-fs4lEBmkbrkQTNACNcBGAsYHQ/$img_h/1200px-Cervus_elaphus_Luc_Viatour_6.jpg",
+    "https://1.bp.blogspot.com/-BJm7LbYLUsw/YPxdostB2aI/AAAAAAAAAnk/j91U4Om4ePMrqf3KfHlvM736bSOGBYu2QCNcBGAsYHQ/$img_h/passerines.jpg",
+    "https://1.bp.blogspot.com/-nBCfn7MMx7k/YPxdtwHRjSI/AAAAAAAAAns/cX_ATwiNYcIq59kmLwN1Fvy3nXr1miQagCNcBGAsYHQ/$img_h/Halloween-Wallpaper.jpg"
   ],
   state: 2,
   mode:0,

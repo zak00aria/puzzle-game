@@ -1,7 +1,7 @@
 body {
     margin:0;
     font-family: 'Squada One', sans-serif;
-    background-color:#f0f0f0;
+    background-color:#cca;
     font-size:18px;
     -webkit-user-select:none;
     user-select:none;
@@ -45,9 +45,9 @@ body {
   margin-bottom:30px;
 }
 #screen-main h1{
-  font-size:56px;
+  font-size:65px;
   text-align:center;
-  line-height:.85;
+  line-height:.8;
   margin:80px 0 60px;
   color:#353535;
   text-shadow:0 2px 4px rgba(0,0,0,.3);
