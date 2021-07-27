@@ -44,6 +44,10 @@ body {
 .nav .btn:not(:last-child){
   margin-bottom:30px;
 }
+#sounds{
+  position:fixed;
+  top:-100vh;
+}
 #screen-main h1{
   font-size:65px;
   text-align:center;

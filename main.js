@@ -1,8 +1,9 @@
-var img_target,ctx,cnv,game;
+var img_target,ctx,cnv,slide_sound,game;
 var w,w_img,h,h_img;
 
 onload=function(){
 
+slide_sound=document.getElementById("slide-sound");
 document.getElementById("to-screen-shose-img").onclick=function(){
   openScreen("screen-main", "screen-shose-img");
   draw_images();
@@ -277,6 +278,7 @@ function move(event) {
       draw_board();
       alert("you win!");
     }
+    play_slide_sound();
   }
   ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
   draw_board();
@@ -382,6 +384,16 @@ function draw_images(){
   }
   if(imgs.children.length==1){
     document.getElementById("controlls").setAttribute("class","hidden");
+  }
+}
+
+function play_slide_sound(){
+  try{
+    slide_sound.pause();
+    slide_sound.currentTime=0;
+    slide_sound.play();
+  }catch(e){
+    //console.log(e)
   }
 }
 
