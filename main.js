@@ -145,10 +145,17 @@ function draw_board(){
 }
 
 function draw_number(num,x,y,size,w,h){
+    var i_x=Math.floor((x+w/2)/(cnv.offsetWidth/game.grid.x));
+    var i_y=Math.floor((y+h/2)/(cnv.offsetHeight/game.grid.y));
+    var i=i_x+i_y*game.grid.x+1;
   ctx.save();
   ctx.font=""+size+"px Squada One";
   ctx.textAlign="center";
-  ctx.fillStyle="rgba(0,0,0,.5)";
+    if(num==i){
+        ctx.fillStyle="rgba(0,150,0,.5)";
+    }else{
+      ctx.fillStyle="rgba(150,0,0,.5)";
+    }
   ctx.fillRect(x,y,w,h);
   ctx.fillStyle="#fff";
   ctx.strokeStyle="#000";
