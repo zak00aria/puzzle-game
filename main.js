@@ -273,6 +273,8 @@ function move(event) {
         }
       }
       game.state=game.states.WIN;
+      ctx.clearRect(0, 0, cnv.offsetWidth, cnv.offsetHeight);
+      draw_board();
       alert("you win!");
     }
   }
@@ -430,6 +432,7 @@ game = {
   start: function() {
     game.moves=0;
     game.time=0;
+    ctx.clearRect(0,0,cnv.offsetWidth,cnv.offsetHeight);
     drawImage();
     game.interval = setInterval(function() {
       if(game.state==game.states.PLAY && game.image.loaded){
